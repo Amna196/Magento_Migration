@@ -12,6 +12,11 @@ public abstract class AbstractMenuService<E extends Loadable<Long>, M extends Mo
     protected R repository;
     protected GenericMapper<E, M> mapper;
 
+    public AbstractMenuService(R  repository, GenericMapper<E, M> mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
     @Override
     public M create(M model) {
         return mapper.entityToModel(create(mapper.modelToEntity(model)));

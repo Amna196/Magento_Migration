@@ -18,7 +18,7 @@ import static org.springframework.http.ResponseEntity.created;
 public abstract class AbstractCRUDController<M extends ModelLoadable<Long>> {
 
     protected final MenuCRUD<?, M> service;
-    @Autowired
+
     protected AbstractCRUDController(MenuCRUD<?, M> service) {
         this.service = service;
     }
