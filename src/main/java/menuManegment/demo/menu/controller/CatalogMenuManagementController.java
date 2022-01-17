@@ -1,6 +1,6 @@
 package menuManegment.demo.menu.controller;
 
-import menuManegment.demo.menu.mapper.CatalogMenuManagmentMapper;
+import menuManegment.demo.menu.mapper.CatalogMenuManagementMapper;
 import menuManegment.demo.menu.model.CatalogMenuManagementModel;
 import menuManegment.demo.menu.repository.CatalogMenuManagementRepository;
 import menuManegment.demo.menu.service.CatalogMenuManagementService;

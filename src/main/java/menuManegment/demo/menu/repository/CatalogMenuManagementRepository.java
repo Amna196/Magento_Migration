@@ -4,5 +4,5 @@ import menuManegment.demo.menu.entity.CatalogMenuManagement;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CatalogMenuManagementRepository extends GenericMenuRepository<CatalogMenuManagement, Long> {
+public interface CatalogMenuManagementRepository extends GenericMenuRepository<CatalogMenuManagement> {
 }

@@ -10,32 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicUpdate;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
-@DynamicUpdate
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "catalog_menu_management")
-public class CatalogMenuManagement extends AbstractMenu<Long> implements Serializable{
-    private static final long serialVersionUID = 1L;
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+public class CatalogMenuManagement extends AbstractMenu<Integer> implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -46,5 +38,6 @@ public class CatalogMenuManagement extends AbstractMenu<Long> implements Seriali
     private int status;
 
     private String platform;
+
 }
 

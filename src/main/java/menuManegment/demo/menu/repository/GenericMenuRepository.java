@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface GenericMenuRepository<T extends Loadable, K> extends JpaRepository<T,K> {
+public interface GenericMenuRepository<T extends Loadable> extends JpaRepository<T, Integer> {
 }
