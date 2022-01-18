@@ -1,18 +1,10 @@
 package menuManegment.demo.menu.entity;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -23,7 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name = "catalog_menu_management")
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-public class CatalogMenuManagement extends AbstractMenu<Integer> implements Serializable{
+public class MenuManagement extends Abstract<Integer> implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

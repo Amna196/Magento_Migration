@@ -1,7 +1,10 @@
 package menuManegment.demo.menu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
@@ -9,8 +12,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CatalogMenuManagementModel extends AbstractMenuModel<Integer> {
+public class MenuManagementModel extends AbstractModel<Integer> {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
 
     @JsonProperty(index = 1)
