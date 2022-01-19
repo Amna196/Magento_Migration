@@ -18,4 +18,6 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
                                      MenuManagementMapper mapper) {
         super(repository, mapper);
     }
+
+
 }

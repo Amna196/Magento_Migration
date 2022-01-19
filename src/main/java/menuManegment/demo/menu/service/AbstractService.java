@@ -1,5 +1,6 @@
 package menuManegment.demo.menu.service;
 
+import javassist.NotFoundException;
 import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.mapper.GenericMapper;
 import menuManegment.demo.menu.model.ModelLoadable;
@@ -18,7 +19,7 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
 
     @Override
     public M create(M model) {
-        return mapper.ToModel(create(mapper.ToEntity(model)));
+        return mapper.toModel(create(mapper.toEntity(model)));
     }
 
 
@@ -26,5 +27,21 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     public E create(E entity) {
         return repository.save(entity);
     }
+
+    @Override
+    public void update(M model) throws NotFoundException {
+        E entity = read(model);
+        repository.save(mapper.entityUpdate(entity, model));
+    }
+
+    @Override
+    public E read(Loadable<Integer> id) throws NotFoundException {
+        if (id == null || id.getId() == null) {
+            //todo: enhance id notfound exception and customize status code
+            throw new NotFoundException("id: (" + id + ") Not Found");
+        }
+        return repository.findById(id.getId()).orElseThrow(() -> new NotFoundException("id: " + id + "Not Found"));
+    }
+
 
 }
