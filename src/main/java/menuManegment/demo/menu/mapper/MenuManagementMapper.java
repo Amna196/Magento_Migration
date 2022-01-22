@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-//@MapperConfig( nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MenuManagementMapper extends GenericMapper<MenuManagement, MenuManagementModel> {
 //@MapperConfig(
 //        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS

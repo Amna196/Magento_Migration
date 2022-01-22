@@ -1,10 +1,12 @@
 package menuManegment.demo.menu.service;
 
-import javassist.NotFoundException;
 import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.mapper.GenericMapper;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.repository.GenericRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class AbstractService<E extends Loadable<Integer>, M extends ModelLoadable<Integer>,
         R extends GenericRepository<E>> implements CRUD<E, M> {
@@ -29,19 +31,30 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     }
 
     @Override
-    public void update(M model) throws NotFoundException {
+    public void update(M model){
         E entity = read(model);
         repository.save(mapper.entityUpdate(entity, model));
     }
 
     @Override
-    public E read(Loadable<Integer> id) throws NotFoundException {
+    public E read(Loadable<Integer> id){
         if (id == null || id.getId() == null) {
-            //todo: enhance id notfound exception and customize status code
-            throw new NotFoundException("id: (" + id + ") Not Found");
+            throw new NoSuchElementException("Please select a valid to update");
         }
-        return repository.findById(id.getId()).orElseThrow(() -> new NotFoundException("id: " + id + "Not Found"));
+        return repository.findById(id.getId()).orElseThrow(() -> new NoSuchElementException("id Not Found"));
     }
+
+
+    //=======================================> for testing only
+    @Override
+    public List<M> retrieveAll(List<Integer> ids) {
+        List<E> entities = repository.findAllById(ids);
+        return mapper.toModels(entities);
+
+    }
+
+    public abstract List<E> updateStatus(String value, List<M> models);
+
 
 
 }

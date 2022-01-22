@@ -4,6 +4,8 @@ import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.model.ModelLoadable;
 import org.mapstruct.MappingTarget;
 
+import java.util.List;
+
 public interface GenericMapper<E extends Loadable<?>, M extends ModelLoadable<?>> {
 
     M toModel(E entity);
@@ -11,4 +13,8 @@ public interface GenericMapper<E extends Loadable<?>, M extends ModelLoadable<?>
     E toEntity(M model);
 
     E entityUpdate(@MappingTarget E entity, M model);
+
+    List<E> toEntities(List<M> models);
+
+    List<M> toModels(List<E> entities);
 }
