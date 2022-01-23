@@ -22,6 +22,11 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
     }
 
     @Override
+    public String name() {
+        return "menu management";
+    }
+
+    @Override
     public List<MenuManagement> updateStatus(String value, List<MenuManagementModel> models) {
         if (value.equals("enable")) {
             for (MenuManagementModel model : models) {
@@ -35,5 +40,4 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
 
         return repository.saveAll(mapper.toEntities(models));
     }
-
 }
