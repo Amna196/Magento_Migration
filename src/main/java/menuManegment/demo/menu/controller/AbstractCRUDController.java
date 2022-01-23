@@ -1,5 +1,6 @@
 package menuManegment.demo.menu.controller;
 
+import javassist.NotFoundException;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.service.CRUD;
 import org.slf4j.Logger;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.created;
+import static org.springframework.http.ResponseEntity.noContent;
 
 public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
 
@@ -29,7 +32,14 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
                 .buildAndExpand(model.getId()).toUri()).build();
     }
 
-    public abstract String controllerPath();
+    @GetMapping("/{id}")
+    public M get(@PathVariable("id") Integer id) throws NotFoundException {
+        return this.service.retrieve(() -> id);
+    }
+    @GetMapping()
+    public List<M> all() {
+        return service.retrieves();
+    }
 
     /**
      * Update Entity
@@ -47,10 +57,10 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
     }
 
     /**
-      * Update Status for all
-      *
-      * @param status, list of ids
-      * @return okay, or exception message
+     * Update Status for all
+     *
+     * @param status, list of ids
+     * @return okay, or exception message
      */
     @PatchMapping("/{status}")
     public ResponseEntity<?> updateList(@PathVariable String status, @RequestBody List<Integer> ids){
@@ -60,4 +70,11 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+        service.delete(() -> id);
+        return noContent().build();
+    }
+
+    public abstract String controllerPath();
 }
