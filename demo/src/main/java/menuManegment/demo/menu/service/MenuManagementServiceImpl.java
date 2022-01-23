@@ -18,4 +18,9 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
                                      MenuManagementMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public String name() {
+        return "menu management";
+    }
 }

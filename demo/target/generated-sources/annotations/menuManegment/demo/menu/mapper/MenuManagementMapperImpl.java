@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-18T12:12:39+0300",
+    date = "2022-01-19T10:51:32+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.13 (Amazon.com Inc.)"
 )
 @Component
 public class MenuManagementMapperImpl implements MenuManagementMapper {
 
     @Override
-    public MenuManagementModel ToModel(MenuManagement entity) {
+    public MenuManagementModel toModel(MenuManagement entity) {
         if ( entity == null ) {
             return null;
         }
@@ -36,7 +36,7 @@ public class MenuManagementMapperImpl implements MenuManagementMapper {
     }
 
     @Override
-    public MenuManagement ToEntity(MenuManagementModel model) {
+    public MenuManagement toEntity(MenuManagementModel model) {
         if ( model == null ) {
             return null;
         }
