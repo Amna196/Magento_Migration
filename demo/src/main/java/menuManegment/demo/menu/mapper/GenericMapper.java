@@ -2,10 +2,19 @@ package menuManegment.demo.menu.mapper;
 
 import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.model.ModelLoadable;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 public interface GenericMapper<E extends Loadable<?>, M extends ModelLoadable<?>> {
 
-    M ToModel(E entity);
+    M toModel(E entity);
 
-    E ToEntity(M model);
+    E toEntity(M model);
+
+    E entityUpdate(@MappingTarget E entity, M model);
+
+    List<E> toEntities(List<M> models);
+
+    List<M> toModels(List<E> entities);
 }

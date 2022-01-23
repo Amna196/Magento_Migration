@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "catalog_menu_management")
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+
 public class MenuManagement extends Abstract<Integer> implements Serializable{
 
     @Id
