@@ -44,8 +44,6 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
         return repository.findById(id.getId()).orElseThrow(() -> new NoSuchElementException("id Not Found"));
     }
 
-
-    //=======================================> for testing only
     @Override
     public List<M> retrieveAll(List<Integer> ids) {
         List<E> entities = repository.findAllById(ids);
@@ -54,7 +52,5 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     }
 
     public abstract List<E> updateStatus(String value, List<M> models);
-
-
 
 }
