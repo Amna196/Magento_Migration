@@ -8,6 +8,8 @@ import menuManegment.demo.menu.repository.MenuManagementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
@@ -18,4 +20,20 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
                                      MenuManagementMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public List<MenuManagement> updateStatus(String value, List<MenuManagementModel> models) {
+        if (value.equals("enable")) {
+            for (MenuManagementModel model : models) {
+                model.setStatus(1);
+            }
+        } else if (value.equals("disable")) {
+            for (MenuManagementModel model : models) {
+                model.setStatus(0);
+            }
+        }
+
+        return repository.saveAll(mapper.toEntities(models));
+    }
+
 }
