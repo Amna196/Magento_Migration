@@ -1,6 +1,5 @@
-package menuManegment.demo.menu.model;
+package menuManegment.demo.menu.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -8,48 +7,65 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
-public class MenuManagementModel implements ModelLoadable<Integer>, Serializable {
+@AllArgsConstructor
+@Entity
+@Table(name = "ves_megamenu_menu")
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+public class MegaMenu implements Loadable<Integer>{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "menu_id")
     private Integer id;
 
+    @NonNull
     private String alias;
 
+    @NonNull
     private String name;
 
-    @JsonProperty("mobile_template")
+    @NonNull
+    @Column(name = "mobile_template")
     private String mobileTemplate;
 
+    @NonNull
+    @Lob
+    @Column(length = 429496729)
     private String structure;
 
-    @JsonProperty("disable_bellow")
+    @NonNull
+    @Column(name = "disable_bellow")
     private short disableBellow;
 
+    @NonNull
     private short status;
 
+    @NonNull
+    @Lob
+    @Column(length = 429496729)
     private String html;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
+
     @JsonProperty("creation_time")
-    LocalDateTime creationTime;
+    @CreatedDate
+    private LocalDateTime creationTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
-    LocalDateTime updateTime;
+    @LastModifiedDate
+    private LocalDateTime updateTime;
 
-    @JsonProperty("desktop_template")
+    @Column(name = "desktop_template")
     private String desktopTemplate;
 
-    @JsonProperty("disable_iblocks")
+    @Column(name = "disable_iblocks")
     private short disableIblocks;
 
     private String event;
@@ -61,13 +77,17 @@ public class MenuManagementModel implements ModelLoadable<Integer>, Serializable
     private short scrolltofixed;
 
     @Column(name = "current_version")
-    @JsonProperty("current_version")
     private String currentVersion;
 
+    @Lob
+    @Column(length = 16777215)
     private String design;
 
+    @Lob
+    @Column(length = 16777215)
     private String params;
 
-    @JsonProperty("mobile_menu_alias")
+    @Column(name = "mobile_menu_alias")
     private String mobileMenuAlias;
 }
+
