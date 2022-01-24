@@ -1,9 +1,12 @@
 package menuManegment.demo.menu.mapper;
 
 import menuManegment.demo.menu.entity.Loadable;
+import menuManegment.demo.menu.entity.MenuManagement;
+import menuManegment.demo.menu.model.MenuManagementModel;
 import menuManegment.demo.menu.model.ModelLoadable;
 import org.mapstruct.MappingTarget;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -19,11 +22,4 @@ public interface GenericMapper<E extends Loadable<?>, M extends ModelLoadable<?>
     List<E> toEntities(List<M> models);
 
     List<M> toModels(List<E> entities);
-
-    default List<M> toModel(Collection<E> entities) {
-        if (entities == null || entities.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return entities.stream().map(this::toModel).collect(Collectors.toList());
-    }
 }
