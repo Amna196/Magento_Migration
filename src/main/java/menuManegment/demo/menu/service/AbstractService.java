@@ -43,7 +43,7 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
 
     @Override
     public List<M> retrieves() {
-        return mapper.toModel(repository.findAll());
+        return mapper.toModels(repository.findAll());
     }
 
     @Override

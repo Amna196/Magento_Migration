@@ -30,11 +30,11 @@ public class MenuManagementServiceImpl extends AbstractService<MenuManagement,
     public List<MenuManagement> updateStatus(String value, List<MenuManagementModel> models) {
         if (value.equals("enable")) {
             for (MenuManagementModel model : models) {
-                model.setStatus(1);
+                model.setStatus((short) 1);
             }
         } else if (value.equals("disable")) {
             for (MenuManagementModel model : models) {
-                model.setStatus(0);
+                model.setStatus((short) 0);
             }
         }
 
