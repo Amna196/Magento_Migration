@@ -30,9 +30,9 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     private String structure;
 
     @JsonProperty("disable_bellow")
-    private short disableBellow;
+    private Short disableBellow;
 
-    private short status;
+    private Short status;
 
     private String html;
 
@@ -48,7 +48,7 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     private String desktopTemplate;
 
     @JsonProperty("disable_iblocks")
-    private short disableIblocks;
+    private Short disableIblocks;
 
     private String event;
 
@@ -56,7 +56,7 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
 
     private String width;
 
-    private short scrolltofixed;
+    private Short scrolltofixed;
 
     @Column(name = "current_version")
     @JsonProperty("current_version")

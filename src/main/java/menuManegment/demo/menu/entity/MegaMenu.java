@@ -42,17 +42,15 @@ public class MegaMenu implements Loadable<Integer>{
 
     @NonNull
     @Column(name = "disable_bellow")
-    private short disableBellow;
+    private Short disableBellow;
 
     @NonNull
-    private short status;
+    private Short status;
 
     @NonNull
     @Lob
     @Column(length = 429496729)
     private String html;
-
-
 
     @JsonProperty("creation_time")
     @CreatedDate
@@ -66,7 +64,7 @@ public class MegaMenu implements Loadable<Integer>{
     private String desktopTemplate;
 
     @Column(name = "disable_iblocks")
-    private short disableIblocks;
+    private Short disableIblocks;
 
     private String event;
 
@@ -74,7 +72,7 @@ public class MegaMenu implements Loadable<Integer>{
 
     private String width;
 
-    private short scrolltofixed;
+    private Short scrolltofixed;
 
     @Column(name = "current_version")
     private String currentVersion;
