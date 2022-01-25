@@ -70,6 +70,18 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * count grid
+     *
+     * @return integer
+     */
+    @GetMapping("/count")
+    public ResponseEntity<?> count(){
+        log.info("<< Calling count api in AbstractCRUDController.... >>");
+        List<M> models = service.retrieves();
+        return ResponseEntity.ok().body(models.stream().count());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
         service.delete(() -> id);
