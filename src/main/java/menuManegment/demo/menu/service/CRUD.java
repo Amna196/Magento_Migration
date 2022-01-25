@@ -19,7 +19,7 @@ public interface CRUD<E extends Loadable<?>, M extends ModelLoadable<?>> {
 
     List<M> retrieveAll(List<Integer> ids);
 
-    List<E> updateStatus(String value, List<M> models);
+    //List<E> updateStatus(String value, List<M> models);
 
     M retrieve(Loadable<Integer> id);
 

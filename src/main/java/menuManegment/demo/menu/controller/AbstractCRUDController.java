@@ -56,32 +56,6 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
 
     }
 
-    /**
-     * Update Status for all
-     *
-     * @param status, list of ids
-     * @return okay, or exception message
-     */
-    @PatchMapping("/{status}")
-    public ResponseEntity<?> updateList(@PathVariable String status, @RequestBody List<Integer> ids){
-        log.info("<< Calling updateList api in AbstractCRUDController.... >>");
-        List<M> models = service.retrieveAll(ids);
-        service.updateStatus(status, models);
-        return ResponseEntity.ok().build();
-    }
-
-    /**
-     * count grid
-     *
-     * @return integer
-     */
-    @GetMapping("/count")
-    public ResponseEntity<?> count(){
-        log.info("<< Calling count api in AbstractCRUDController.... >>");
-        List<M> models = service.retrieves();
-        return ResponseEntity.ok().body(models.stream().count());
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
         service.delete(() -> id);

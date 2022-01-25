@@ -1,10 +1,11 @@
-package menuManegment.demo.menu.service;
+package menuManegment.demo.menu.service.megaMenu;
 
 import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.mapper.MegaMenuMapper;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.repository.MegaMenuRepository;
+import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,6 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
         super(repository, mapper);
     }
 
-    @Override
-    public String name() {
-        return "menu management";
-    }
-
-    @Override
     public List<MegaMenu> updateStatus(String value, List<MegaMenuModel> models) {
         if (value.equals("enable")) {
             for (MegaMenuModel model : models) {

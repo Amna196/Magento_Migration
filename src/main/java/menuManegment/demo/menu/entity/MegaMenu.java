@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -87,5 +88,8 @@ public class MegaMenu implements Loadable<Integer>{
 
     @Column(name = "mobile_menu_alias")
     private String mobileMenuAlias;
+
+    @OneToMany(mappedBy = "menu")
+    private List<MegaMenuItem> menuItems;
 }
 

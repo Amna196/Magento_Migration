@@ -67,8 +67,4 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
         return repository.findById(id.getId()).orElseThrow(() -> new NoSuchElementException("id Not Found"));
     }
 
-    public abstract String name();
-
-    public abstract List<E> updateStatus(String value, List<M> models);
-
 }
