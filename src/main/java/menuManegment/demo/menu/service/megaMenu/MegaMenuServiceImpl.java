@@ -7,6 +7,7 @@ import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.repository.MegaMenuRepository;
 import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,13 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
 
 
     public List<MegaMenu> updateStatus(String value, List<MegaMenuModel> models) {
-        if (value.equals("enable")) {
+        if ("enable".equals(value)) {
             for (MegaMenuModel model : models) {
-                model.setStatus((short) 1);
+                model.setStatus(MegaMenuModel.statusType.ENABLE);
             }
-        } else if (value.equals("disable")) {
+        } else if ("disable".equals(value)) {
             for (MegaMenuModel model : models) {
-                model.setStatus((short) 0);
+                model.setStatus(MegaMenuModel.statusType.DISABLE);
             }
         }
 
@@ -42,4 +43,11 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
         Long count = models.stream().count();
         return count;
     }
+
+//    public List<MegaMenu> search(String keyword) {
+//        Long count = repository.findAll(keyword);
+//        return count;
+//    }
+
+
 }
