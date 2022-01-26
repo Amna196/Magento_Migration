@@ -32,7 +32,7 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("disable_bellow")
     private Short disableBellow;
 
-    private Short status;
+    private statusType status;
 
     private String html;
 
@@ -68,4 +68,9 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
 
     @JsonProperty("mobile_menu_alias")
     private String mobileMenuAlias;
+
+    public enum statusType{
+        DISABLE,
+        ENABLE;
+    };
 }

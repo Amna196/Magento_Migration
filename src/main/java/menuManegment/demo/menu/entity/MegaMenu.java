@@ -3,10 +3,12 @@ package menuManegment.demo.menu.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import menuManegment.demo.menu.model.MegaMenuModel;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class MegaMenu implements Loadable<Integer>{
     private Short disableBellow;
 
     @NonNull
-    private Short status;
+    private MegaMenuModel.statusType status;
 
     @NonNull
     @Lob
@@ -91,5 +93,11 @@ public class MegaMenu implements Loadable<Integer>{
 
     @OneToMany(mappedBy = "menu")
     private List<MegaMenuItem> menuItems;
+
+//    public enum Status{
+//        DISABLE,
+//        ENABLE;
+//    };
+
 }
 
