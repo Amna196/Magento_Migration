@@ -46,13 +46,14 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     /**
      * count grid
      *
-     * @return integer
+     * @return Long
      */
     @GetMapping("/count")
     public ResponseEntity<?> count(){
         log.info("<< Calling count api in AbstractCRUDController.... >>");
         List<MegaMenuModel> models = service.retrieves();
-        return ResponseEntity.ok().body(models.stream().count());
+        Long count = megaMenuService.count(models);
+        return ResponseEntity.ok().body(count);
     }
 
 }
