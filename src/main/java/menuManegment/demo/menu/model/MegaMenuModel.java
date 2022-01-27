@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -73,4 +74,6 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
         DISABLE,
         ENABLE;
     };
+
+    private List<MegaMenuItemModel> menuItems;
 }

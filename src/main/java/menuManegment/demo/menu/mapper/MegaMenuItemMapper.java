@@ -8,4 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MegaMenuItemMapper extends GenericMapper<MegaMenuItem, MegaMenuItemModel> {
+
+    @Override
+    @Mapping(target = "menu.menuItems", ignore = true)
+    MegaMenuItemModel toModel(MegaMenuItem entity);
 }

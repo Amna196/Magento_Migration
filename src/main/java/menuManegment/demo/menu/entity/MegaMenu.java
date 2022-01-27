@@ -1,5 +1,6 @@
 package menuManegment.demo.menu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -91,7 +92,8 @@ public class MegaMenu implements Loadable<Integer>{
     @Column(name = "mobile_menu_alias")
     private String mobileMenuAlias;
 
-    @OneToMany(mappedBy = "menu")
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<MegaMenuItem> menuItems;
 
 //    public enum Status{

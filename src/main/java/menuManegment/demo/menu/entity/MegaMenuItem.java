@@ -86,9 +86,10 @@ public class MegaMenuItem implements Loadable<Integer>{
     private String contentWidth;
 
     @Column(name = "content_type")
-    private content contentType;
+    @Enumerated(EnumType.STRING)
+    private Content contentType;
 
-    public enum content{
+    public enum Content {
         childmenu,
         content,
         dynamic,
@@ -96,9 +97,10 @@ public class MegaMenuItem implements Loadable<Integer>{
     }; // = ["Child Menu Item", "Content", "Dynamic Content Tab", "Sub-Categories"];
 
     @Column(name = "link_type")
-    private link linkType;
+    @Enumerated(EnumType.STRING)
+    private Link linkType;
 
-    public enum link{
+    public enum Link {
         custom_link,
         category_link;
     }; // = ["Custom Link", "Category Link"];
@@ -109,9 +111,10 @@ public class MegaMenuItem implements Loadable<Integer>{
     @Column(length = 65535)
     private String category;
 
-    private target target;
+    @Enumerated(EnumType.STRING)
+    private Target target;
 
-    public enum target{
+    public enum Target {
         _blank,
         _self,
         _parent,
@@ -219,7 +222,7 @@ public class MegaMenuItem implements Loadable<Integer>{
     private Short isgroupLevel;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JoinColumn(name = "menu_id")
     private MegaMenu menu;
 
 }

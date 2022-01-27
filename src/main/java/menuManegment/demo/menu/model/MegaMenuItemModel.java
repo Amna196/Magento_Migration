@@ -14,6 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
 
     @JsonProperty("item_id")
@@ -179,6 +180,6 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("isgroup_level")
     private Short isgroupLevel;
 
-    private MegaMenu menu;
+    private MegaMenuModel menu;
     
 }
