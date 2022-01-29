@@ -14,7 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "ves_megamenu_item")
-
 public class MegaMenuItem implements Loadable<Integer>{
 
     @Id

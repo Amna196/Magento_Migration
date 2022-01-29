@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import menuManegment.demo.menu.entity.MegaMenu;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -69,6 +71,8 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
 
     @JsonProperty("mobile_menu_alias")
     private String mobileMenuAlias;
+
+    private List<MegaMenuItemModel> megaMenuItemModels;
 
     public enum statusType{
         DISABLE,
