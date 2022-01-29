@@ -72,8 +72,6 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("mobile_menu_alias")
     private String mobileMenuAlias;
 
-    private List<MegaMenuItemModel> megaMenuItemModels;
-
     public enum statusType{
         DISABLE,
         ENABLE;

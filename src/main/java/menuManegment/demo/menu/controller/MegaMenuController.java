@@ -57,18 +57,6 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
         return ResponseEntity.ok().body(count);
     }
 
-//    /**
-//     * Search By Keyword
-//     *
-//     * @param keyword
-//     * @return okay, or exception message
-//     */
-//    @GetMapping("/search/{keyword}")
-//    public ResponseEntity<?> search(@PathVariable String keyword){
-//        log.info("<< Calling search api in AbstractCRUDController.... >>");
-//        List<?> entities = megaMenuService.search(keyword);
-//        return ResponseEntity.ok().build();
-//
-//    }
+
 
 }
