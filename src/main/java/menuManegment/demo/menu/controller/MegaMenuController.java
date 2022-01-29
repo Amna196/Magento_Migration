@@ -6,6 +6,7 @@ import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +56,19 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
         Long count = megaMenuService.count(models);
         return ResponseEntity.ok().body(count);
     }
+
+//    /**
+//     * Search By Keyword
+//     *
+//     * @param keyword
+//     * @return okay, or exception message
+//     */
+//    @GetMapping("/search/{keyword}")
+//    public ResponseEntity<?> search(@PathVariable String keyword){
+//        log.info("<< Calling search api in AbstractCRUDController.... >>");
+//        List<?> entities = megaMenuService.search(keyword);
+//        return ResponseEntity.ok().build();
+//
+//    }
 
 }

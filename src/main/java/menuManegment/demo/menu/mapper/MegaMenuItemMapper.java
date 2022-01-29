@@ -12,4 +12,5 @@ public interface MegaMenuItemMapper extends GenericMapper<MegaMenuItem, MegaMenu
     @Override
     @Mapping(target = "menu.menuItems", ignore = true)
     MegaMenuItemModel toModel(MegaMenuItem entity);
+
 }

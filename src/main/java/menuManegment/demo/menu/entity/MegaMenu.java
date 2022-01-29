@@ -21,7 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "ves_megamenu_menu")
-
 public class MegaMenu implements Loadable<Integer>{
 
     @Id

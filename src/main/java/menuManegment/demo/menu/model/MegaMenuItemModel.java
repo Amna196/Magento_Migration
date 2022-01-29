@@ -1,5 +1,6 @@
 package menuManegment.demo.menu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
