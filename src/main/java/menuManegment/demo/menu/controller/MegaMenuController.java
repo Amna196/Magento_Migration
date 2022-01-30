@@ -1,5 +1,6 @@
 package menuManegment.demo.menu.controller;
 
+import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuService;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(MegaMenuController.PATH)
@@ -57,6 +59,13 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
         return ResponseEntity.ok().body(count);
     }
 
-
+//    @GetMapping("/search/{keyword}")
+//    public ResponseEntity<?> getByFilter(@PathVariable("keyword") Integer keyword) {
+//        if(keyword != null) {
+//            List<MegaMenu> megas = megaMenuService.getAll(keyword);
+//            return ResponseEntity.ok().body(megas);
+//        }
+//        return null;
+//    }
 
 }

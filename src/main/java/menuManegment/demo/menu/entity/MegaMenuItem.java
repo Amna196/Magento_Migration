@@ -3,12 +3,15 @@ package menuManegment.demo.menu.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import menuManegment.demo.menu.enums.Content;
+import menuManegment.demo.menu.enums.Link;
+import menuManegment.demo.menu.enums.Status;
+import menuManegment.demo.menu.enums.Target;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@ToString
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,7 +52,7 @@ public class MegaMenuItem implements Loadable<Integer>{
     @Column(name = "is_group")
     private Short isGroup;
 
-    private Short status;
+    private Status status;
 
     @NonNull
     @Column(name = "disable_bellow")
@@ -88,21 +91,9 @@ public class MegaMenuItem implements Loadable<Integer>{
     @Enumerated(EnumType.STRING)
     private Content contentType;
 
-    public enum Content {
-        childmenu,
-        content,
-        dynamic,
-        parentcat;
-    }; // = ["Child Menu Item", "Content", "Dynamic Content Tab", "Sub-Categories"];
-
     @Column(name = "link_type")
     @Enumerated(EnumType.STRING)
     private Link linkType;
-
-    public enum Link {
-        custom_link,
-        category_link;
-    }; // = ["Custom Link", "Category Link"];
 
     private String link;
 
@@ -112,14 +103,6 @@ public class MegaMenuItem implements Loadable<Integer>{
 
     @Enumerated(EnumType.STRING)
     private Target target;
-
-    public enum Target {
-        _blank,
-        _self,
-        _parent,
-        _top;
-    }; // = ["Load in a new window", "Load in the same frame as it was clicked",
-          // "Load in the parent frameset", "Load in the full body of the window"];
 
     @Lob
     @Column(length = 65535, name = "content_html")
@@ -220,8 +203,14 @@ public class MegaMenuItem implements Loadable<Integer>{
     @Column(name = "isgroup_level")
     private Short isgroupLevel;
 
+    private Integer menu_id;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
+    @JsonIgnore
+//    @JsonBackReference
     private MegaMenu menu;
+
+
 
 }
