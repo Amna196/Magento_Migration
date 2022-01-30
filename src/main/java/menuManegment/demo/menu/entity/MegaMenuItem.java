@@ -208,7 +208,6 @@ public class MegaMenuItem implements Loadable<Integer>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", insertable = false, updatable = false)
     @JsonIgnore
-//    @JsonBackReference
     private MegaMenu menu;
 
 

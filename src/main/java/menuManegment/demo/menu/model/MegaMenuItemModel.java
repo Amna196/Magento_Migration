@@ -181,5 +181,5 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
 
     private Integer menu_id;
 
-    private MegaMenuModel menu;
+    private MegaMenuModel megaMenu;
 }
