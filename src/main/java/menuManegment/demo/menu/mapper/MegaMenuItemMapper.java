@@ -14,15 +14,7 @@ import java.util.List;
 public interface MegaMenuItemMapper extends GenericMapper<MegaMenuItem, MegaMenuItemModel> {
 
     @Override
-    @Mapping(target = "menu.menuItems", ignore = true)
+    @Mapping(target = "megaMenu", ignore = true)
     MegaMenuItemModel toModel(MegaMenuItem entity);
-
-    @Override
-    @Mapping(target = "menu.menuItems", ignore = true)
-    List<MegaMenuItemModel> toModels(List<MegaMenuItem> entities);
-
-//    @Override
-//    @Mapping(target = "menuItems.menu", ignore = true)
-//    List<MegaMenuItem> toEntities(List<MegaMenuItemModel> models);
 
 }
