@@ -1,21 +1,18 @@
 package menuManegment.demo.menu.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import menuManegment.demo.menu.model.MegaMenuModel;
+import menuManegment.demo.menu.enums.Status;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,7 +45,7 @@ public class MegaMenu implements Loadable<Integer>{
     private Short disableBellow;
 
     @NonNull
-    private MegaMenuModel.statusType status;
+    private Status status;
 
     @NonNull
     @Lob
@@ -91,14 +88,12 @@ public class MegaMenu implements Loadable<Integer>{
     @Column(name = "mobile_menu_alias")
     private String mobileMenuAlias;
 
-    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "menu")
+//    , fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    @JsonManagedReference
     private List<MegaMenuItem> menuItems;
 
-//    public enum Status{
-//        DISABLE,
-//        ENABLE;
-//    };
 
 }
 

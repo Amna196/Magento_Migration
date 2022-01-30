@@ -34,7 +34,7 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
     }
 
     @GetMapping("/{id}")
-    public M get(@PathVariable("id") Integer id) throws NotFoundException {
+    public M get(@PathVariable("id") Integer id){
         return this.service.retrieve(() -> id);
     }
 

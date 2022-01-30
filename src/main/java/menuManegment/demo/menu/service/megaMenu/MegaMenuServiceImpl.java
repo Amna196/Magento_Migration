@@ -2,6 +2,7 @@ package menuManegment.demo.menu.service.megaMenu;
 
 import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.entity.MegaMenu;
+import menuManegment.demo.menu.enums.Status;
 import menuManegment.demo.menu.mapper.MegaMenuMapper;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.repository.MegaMenuRepository;
@@ -30,11 +31,11 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
     public List<MegaMenu> updateStatus(String value, List<MegaMenuModel> models) {
         if ("enable".equals(value)) {
             for (MegaMenuModel model : models) {
-                model.setStatus(MegaMenuModel.statusType.ENABLE);
+                model.setStatus(Status.ENABLE);
             }
         } else if ("disable".equals(value)) {
             for (MegaMenuModel model : models) {
-                model.setStatus(MegaMenuModel.statusType.DISABLE);
+                model.setStatus(Status.DISABLE);
             }
         }
 
@@ -45,6 +46,11 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
         Long count = models.stream().count();
         return count;
     }
+
+//    //testing filters with query
+//    public List<MegaMenu> getAll(Integer keyword){
+//        return repository.findAll(keyword);
+//    }
 
 
 
