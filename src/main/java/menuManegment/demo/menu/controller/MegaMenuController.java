@@ -4,6 +4,7 @@ import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuService;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
+import menuManegment.demo.menu.specification.MegaMenuSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,12 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
         List<MegaMenuModel> models = service.retrieves();
         Long count = megaMenuService.count(models);
         return ResponseEntity.ok().body(count);
+    }
+
+    @GetMapping("/specification")
+    public ResponseEntity<?> specification(MegaMenuSpecification specification) {
+        return ResponseEntity.ok(megaMenuService.fetch(specification));
+
     }
 
 //    @GetMapping("/search/{keyword}")
