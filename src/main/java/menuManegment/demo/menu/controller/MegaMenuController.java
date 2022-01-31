@@ -1,6 +1,5 @@
 package menuManegment.demo.menu.controller;
 
-import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuService;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
@@ -8,12 +7,10 @@ import menuManegment.demo.menu.specification.MegaMenuSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(MegaMenuController.PATH)
@@ -41,7 +38,7 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
      */
     @PatchMapping("/{status}")
     public ResponseEntity<?> updateList(@PathVariable String status, @RequestBody List<Integer> ids){
-        log.info("<< Calling updateList api in AbstractCRUDController.... >>");
+        log.info("<< Calling updateList api in MegaMenuController.... >>");
         List<MegaMenuModel> models = service.retrieveAll(ids);
         megaMenuService.updateStatus(status, models);
         return ResponseEntity.ok().build();
@@ -54,25 +51,23 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
      */
     @GetMapping("/count")
     public ResponseEntity<?> count(){
-        log.info("<< Calling count api in AbstractCRUDController.... >>");
+        log.info("<< Calling count api in MegaMenuController.... >>");
         List<MegaMenuModel> models = service.retrieves();
         Long count = megaMenuService.count(models);
         return ResponseEntity.ok().body(count);
     }
 
+    /**
+     * specification
+     *
+     * @param specification for (id, name, alias, creationTime, updatedTime) fields
+     * @return list of MegaMenuModel
+     */
     @GetMapping("/specification")
     public ResponseEntity<?> specification(MegaMenuSpecification specification) {
+        log.info("<< Calling specification api in MegaMenuController.... >>");
         return ResponseEntity.ok(megaMenuService.fetch(specification));
 
     }
-
-//    @GetMapping("/search/{keyword}")
-//    public ResponseEntity<?> getByFilter(@PathVariable("keyword") Integer keyword) {
-//        if(keyword != null) {
-//            List<MegaMenu> megas = megaMenuService.getAll(keyword);
-//            return ResponseEntity.ok().body(megas);
-//        }
-//        return null;
-//    }
 
 }

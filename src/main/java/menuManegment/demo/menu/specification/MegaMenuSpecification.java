@@ -3,10 +3,12 @@ package menuManegment.demo.menu.specification;
 import lombok.*;
 import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.enums.Status;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.criteria.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +31,20 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
     private String alias;
     private Integer id;
     private Status status;
-//    private LocalDateTime creationTime;
-//    private LocalDateTime updateTime;
-//    private LocalDateTime startDate;
-//    private LocalDateTime endDate;
+
+    private LocalDateTime creationTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startDateCreation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endDateCreation;
+
+    private LocalDateTime updateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startDateUpdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endDateUpdate;
+
+    private static final Logger log = LoggerFactory.getLogger(MegaMenuSpecification.class);
 
     @Override
     public Predicate toPredicate(@NonNull Root<MegaMenu> root, @NonNull CriteriaQuery<?> query,
@@ -48,14 +60,17 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
             predicates.add(getId(id).toPredicate(root, query, builder));
         }
         if(Objects.nonNull(status) && status != null) {
+            log.info("<< Calling if condition for status .... >>");
             predicates.add(getStatus(status).toPredicate(root, query, builder));
         }
-//        if(Objects.nonNull(creationTime) && creationTime != null) {
-//            predicates.add(getCreationTime(creationTime).toPredicate(root, query, builder));
-//        }
-//        if(Objects.nonNull(updateTime) && updateTime != null) {
-//            predicates.add(getUpdateTime(updateTime).toPredicate(root, query, builder));
-//        }
+        if(Objects.nonNull(startDateCreation) && startDateCreation != null && Objects.nonNull(endDateCreation) && endDateCreation != null) {
+            log.info("<< Calling if condition for creationTime .... >>");
+            predicates.add(getCreationTime(startDateCreation, endDateCreation).toPredicate(root, query, builder));
+        }
+        if(Objects.nonNull(startDateUpdate) && startDateUpdate != null && Objects.nonNull(endDateUpdate) && endDateUpdate != null) {
+            log.info("<< Calling if condition for updateTime .... >>");
+            predicates.add(getUpdateTime(startDateUpdate, endDateUpdate).toPredicate(root, query, builder));
+        }
         return builder.and(predicates.toArray(new Predicate[]{}));
     }
 
@@ -70,13 +85,18 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
         return (root, query, builder) -> builder.equal(root.get(ID), id);
     }
     private Specification<MegaMenu> getStatus(Status status){
+        log.info("<< Inside getStatus method .... >>");
         return (root, query, builder) -> builder.equal(root.get(STATUS), status);
     }
-//    private Specification<MegaMenu> getCreationTime(LocalDateTime creationTime){
-//        return (root, query, builder) -> builder.between(root.get(CREATION_TIME), startDate, endDate);
-//    }
-//    private Specification<MegaMenu> getUpdateTime(LocalDateTime updateTime){
-//        return (root, query, builder) -> builder.between(root.get(UPDATE_TIME), updateTime, );
-//    }
+    private Specification<MegaMenu> getCreationTime( LocalDateTime startDateCreation, LocalDateTime endDateCreation){
+        log.info("<< Inside getCreationTime method .... >>");
+        return (root, query, builder) -> builder.between(root.get(CREATION_TIME), startDateCreation, endDateCreation);
+        //api =  localhost:8081/v1/menus/specification?startDateCreation=2016-03-15 18:29:47&endDateCreation=2016-05-06 11:10:42
+    }
+    private Specification<MegaMenu> getUpdateTime(LocalDateTime startDateUpdate, LocalDateTime endDateUpdate){
+        log.info("<< Inside getUpdateTime method .... >>");
+        return (root, query, builder) -> builder.between(root.get(UPDATE_TIME), startDateUpdate, endDateUpdate);
+        //api = localhost:8081/v1/menus/specification?startDateUpdate=2022-01-26 12:33:13&endDateUpdate=2022-01-30 12:36:24
+    }
 
 }
