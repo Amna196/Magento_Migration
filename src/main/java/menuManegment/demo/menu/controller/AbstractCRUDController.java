@@ -1,11 +1,9 @@
 package menuManegment.demo.menu.controller;
 
-import javassist.NotFoundException;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.service.CRUD;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
