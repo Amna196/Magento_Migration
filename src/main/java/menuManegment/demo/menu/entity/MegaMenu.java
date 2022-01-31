@@ -89,11 +89,7 @@ public class MegaMenu implements Loadable<Integer>{
     private String mobileMenuAlias;
 
     @OneToMany(mappedBy = "menu")
-//    , fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<MegaMenuItem> menuItems;
-
 
 }
 
