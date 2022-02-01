@@ -5,8 +5,6 @@ import menuManegment.demo.menu.model.MegaMenuModel;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface MegaMenuMapper extends GenericMapper<MegaMenu, MegaMenuModel> {

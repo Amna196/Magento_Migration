@@ -8,6 +8,8 @@ import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.repository.MegaMenuRepository;
 import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -23,13 +25,12 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
         super(repository, mapper);
     }
 
-
     public List<MegaMenu> updateStatus(String value, List<MegaMenuModel> models) {
-        if ("enable".equals(value)) {
+        if (Status.ENABLE.equals(value)) {
             for (MegaMenuModel model : models) {
                 model.setStatus(Status.ENABLE);
             }
-        } else if ("disable".equals(value)) {
+        } else if (Status.DISABLE.equals(value)) {
             for (MegaMenuModel model : models) {
                 model.setStatus(Status.DISABLE);
             }
@@ -43,7 +44,12 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
         return count;
     }
 
-    public List<MegaMenuModel> fetch(Specification<MegaMenu> specification) {
-            return mapper.toModels(repository.findAll(specification));
+    public Page<MegaMenu> fetch(Specification<MegaMenu> specification, Pageable pageable) {
+         return repository.findAll(specification, pageable);
         }
+
+    public Page<MegaMenu> retrieves(Pageable pageable) {
+        return repository.findAll(pageable);
+
+    }
 }

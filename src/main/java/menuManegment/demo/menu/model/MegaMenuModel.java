@@ -60,7 +60,6 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
 
     private Short scrolltofixed;
 
-    @Column(name = "current_version")
     @JsonProperty("current_version")
     private String currentVersion;
 
@@ -72,4 +71,5 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     private String mobileMenuAlias;
 
     private List<MegaMenuItemModel> menuItems;
+
 }

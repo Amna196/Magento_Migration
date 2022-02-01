@@ -210,6 +210,4 @@ public class MegaMenuItem implements Loadable<Integer>{
     @JsonIgnore
     private MegaMenu menu;
 
-
-
 }

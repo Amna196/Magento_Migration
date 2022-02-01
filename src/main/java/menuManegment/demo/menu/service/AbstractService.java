@@ -7,7 +7,6 @@ import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.mapper.GenericMapper;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.repository.GenericRepository;
-import org.springframework.data.jpa.domain.Specification;
 
 public abstract class AbstractService<E extends Loadable<Integer>, M extends ModelLoadable<Integer>,
         R extends GenericRepository<E>> implements CRUD<E, M> {
