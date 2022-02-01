@@ -60,15 +60,14 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
             predicates.add(getId(id).toPredicate(root, query, builder));
         }
         if(Objects.nonNull(status) && status != null) {
-            log.info("<< Calling if condition for status .... >>");
             predicates.add(getStatus(status).toPredicate(root, query, builder));
         }
-        if(Objects.nonNull(startDateCreation) && startDateCreation != null && Objects.nonNull(endDateCreation) && endDateCreation != null) {
-            log.info("<< Calling if condition for creationTime .... >>");
+        if(Objects.nonNull(startDateCreation) && startDateCreation != null &&
+                Objects.nonNull(endDateCreation) && endDateCreation != null) {
             predicates.add(getCreationTime(startDateCreation, endDateCreation).toPredicate(root, query, builder));
         }
-        if(Objects.nonNull(startDateUpdate) && startDateUpdate != null && Objects.nonNull(endDateUpdate) && endDateUpdate != null) {
-            log.info("<< Calling if condition for updateTime .... >>");
+        if(Objects.nonNull(startDateUpdate) && startDateUpdate != null &&
+                Objects.nonNull(endDateUpdate) && endDateUpdate != null) {
             predicates.add(getUpdateTime(startDateUpdate, endDateUpdate).toPredicate(root, query, builder));
         }
         return builder.and(predicates.toArray(new Predicate[]{}));
@@ -85,18 +84,13 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
         return (root, query, builder) -> builder.equal(root.get(ID), id);
     }
     private Specification<MegaMenu> getStatus(Status status){
-        log.info("<< Inside getStatus method .... >>");
         return (root, query, builder) -> builder.equal(root.get(STATUS), status);
     }
     private Specification<MegaMenu> getCreationTime( LocalDateTime startDateCreation, LocalDateTime endDateCreation){
-        log.info("<< Inside getCreationTime method .... >>");
         return (root, query, builder) -> builder.between(root.get(CREATION_TIME), startDateCreation, endDateCreation);
-        //api =  localhost:8081/v1/menus/specification?startDateCreation=2016-03-15 18:29:47&endDateCreation=2016-05-06 11:10:42
     }
     private Specification<MegaMenu> getUpdateTime(LocalDateTime startDateUpdate, LocalDateTime endDateUpdate){
-        log.info("<< Inside getUpdateTime method .... >>");
         return (root, query, builder) -> builder.between(root.get(UPDATE_TIME), startDateUpdate, endDateUpdate);
-        //api = localhost:8081/v1/menus/specification?startDateUpdate=2022-01-26 12:33:13&endDateUpdate=2022-01-30 12:36:24
     }
 
 }

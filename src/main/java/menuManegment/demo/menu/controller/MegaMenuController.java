@@ -7,6 +7,7 @@ import menuManegment.demo.menu.specification.MegaMenuSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,14 +61,23 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     /**
      * specification
      *
-     * @param specification for (id, name, alias, creationTime, updatedTime) fields
+     * @param specification for (id, name, alias, status, creationTime, updatedTime) fields
      * @return list of MegaMenuModel
      */
     @GetMapping("/specification")
-    public ResponseEntity<?> specification(MegaMenuSpecification specification) {
+    public ResponseEntity<?> specification(MegaMenuSpecification specification, Pageable pageable) {
         log.info("<< Calling specification api in MegaMenuController.... >>");
-        return ResponseEntity.ok(megaMenuService.fetch(specification));
+        return ResponseEntity.ok(megaMenuService.fetch(specification, pageable));
 
     }
 
+    /**
+     * Find All with Pagination
+     *
+     */
+    @GetMapping("/")
+    public ResponseEntity<?> allWithPagination(Pageable pageable) {
+        log.info("<< Calling allWithPagination api in allWithPagination.... >>");
+        return  ResponseEntity.ok().body(megaMenuService.retrieves(pageable));
+    }
 }
