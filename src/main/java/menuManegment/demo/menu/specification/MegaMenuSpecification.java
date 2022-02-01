@@ -8,8 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,16 +38,16 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
     private Status status;
 
     private LocalDateTime creationTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startDateCreation;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endDateCreation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate  startDateCreation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDateCreation;
 
     private LocalDateTime updateTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startDateUpdate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endDateUpdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDateUpdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDateUpdate;
 
     private static final Logger log = LoggerFactory.getLogger(MegaMenuSpecification.class);
 
@@ -86,11 +91,15 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
     private Specification<MegaMenu> getStatus(Status status){
         return (root, query, builder) -> builder.equal(root.get(STATUS), status);
     }
-    private Specification<MegaMenu> getCreationTime( LocalDateTime startDateCreation, LocalDateTime endDateCreation){
-        return (root, query, builder) -> builder.between(root.get(CREATION_TIME), startDateCreation, endDateCreation);
+    private Specification<MegaMenu> getCreationTime(LocalDate  startDateCreation, LocalDate  endDateCreation){
+        LocalTime timePart = LocalTime.parse("00:00:00");
+        return (root, query, builder) -> builder.between(root.get(CREATION_TIME),
+                LocalDateTime.of(startDateCreation, timePart), LocalDateTime.of(endDateCreation, timePart));
     }
-    private Specification<MegaMenu> getUpdateTime(LocalDateTime startDateUpdate, LocalDateTime endDateUpdate){
-        return (root, query, builder) -> builder.between(root.get(UPDATE_TIME), startDateUpdate, endDateUpdate);
+    private Specification<MegaMenu> getUpdateTime(LocalDate startDateUpdate, LocalDate endDateUpdate){
+        LocalTime timePart = LocalTime.parse("00:00:00");
+        return (root, query, builder) -> builder.between(root.get(UPDATE_TIME),
+                LocalDateTime.of(startDateUpdate, timePart), LocalDateTime.of(endDateUpdate, timePart));
     }
 
 }
