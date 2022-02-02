@@ -1,24 +1,22 @@
 package menuManegment.demo.menu.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.service.CRUD;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.created;
 import static org.springframework.http.ResponseEntity.noContent;
 
+@Slf4j
 public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
 
     protected final CRUD<?, M> service;
-    private static final Logger log = LoggerFactory.getLogger(AbstractCRUDController.class);
 
     protected AbstractCRUDController(CRUD<?, M> service) {
         this.service = service;
