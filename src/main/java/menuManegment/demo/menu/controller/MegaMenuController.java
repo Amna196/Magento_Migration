@@ -1,23 +1,21 @@
 package menuManegment.demo.menu.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuService;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
 import menuManegment.demo.menu.specification.MegaMenuSpecification;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping(MegaMenuController.PATH)
 public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     public static final String PATH = "/v1/menus";
-    private static final Logger log = LoggerFactory.getLogger(MegaMenuController.class);
 
     @Autowired
     private MegaMenuServiceImpl megaMenuService;

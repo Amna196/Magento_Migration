@@ -1,10 +1,10 @@
 package menuManegment.demo.menu.specification;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.entity.MegaMenu;
 import menuManegment.demo.menu.enums.Status;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import menuManegment.demo.menu.utils.Constants;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,14 +23,8 @@ import java.util.Objects;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class MegaMenuSpecification implements Specification<MegaMenu> {
-
-    private static final String NAME = "name";
-    private static final String ALIAS = "alias";
-    private static final String ID = "id";
-    private static final String STATUS = "status";
-    private static final String CREATION_TIME = "creationTime";
-    private static final String UPDATE_TIME = "updateTime";
 
     private String name;
     private String alias;
@@ -48,8 +42,6 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
     private LocalDate startDateUpdate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDateUpdate;
-
-    private static final Logger log = LoggerFactory.getLogger(MegaMenuSpecification.class);
 
     @Override
     public Predicate toPredicate(@NonNull Root<MegaMenu> root, @NonNull CriteriaQuery<?> query,
@@ -80,25 +72,25 @@ public class MegaMenuSpecification implements Specification<MegaMenu> {
 
     // operation methods
     private Specification<MegaMenu> getNames(String name) {
-        return (root, query, builder) -> builder.like(root.get(NAME),"%" + name + "%");
+        return (root, query, builder) -> builder.like(root.get(Constants.NAME),"%" + name + "%");
     }
     private Specification<MegaMenu> getAlias(String alias){
-        return (root, query, builder) -> builder.like(root.get(ALIAS),"%" + alias + "%");
+        return (root, query, builder) -> builder.like(root.get(Constants.ALIAS),"%" + alias + "%");
     }
     private Specification<MegaMenu> getId(Integer id){
-        return (root, query, builder) -> builder.equal(root.get(ID), id);
+        return (root, query, builder) -> builder.equal(root.get(Constants.ID), id);
     }
     private Specification<MegaMenu> getStatus(Status status){
-        return (root, query, builder) -> builder.equal(root.get(STATUS), status);
+        return (root, query, builder) -> builder.equal(root.get(Constants.STATUS), status);
     }
     private Specification<MegaMenu> getCreationTime(LocalDate  startDateCreation, LocalDate  endDateCreation){
         LocalTime timePart = LocalTime.parse("00:00:00");
-        return (root, query, builder) -> builder.between(root.get(CREATION_TIME),
+        return (root, query, builder) -> builder.between(root.get(Constants.CREATION_TIME),
                 LocalDateTime.of(startDateCreation, timePart), LocalDateTime.of(endDateCreation, timePart));
     }
     private Specification<MegaMenu> getUpdateTime(LocalDate startDateUpdate, LocalDate endDateUpdate){
         LocalTime timePart = LocalTime.parse("00:00:00");
-        return (root, query, builder) -> builder.between(root.get(UPDATE_TIME),
+        return (root, query, builder) -> builder.between(root.get(Constants.UPDATE_TIME),
                 LocalDateTime.of(startDateUpdate, timePart), LocalDateTime.of(endDateUpdate, timePart));
     }
 
