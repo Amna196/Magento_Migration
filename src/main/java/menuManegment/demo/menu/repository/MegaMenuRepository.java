@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MegaMenuRepository extends GenericRepository<MegaMenu>, JpaSpecificationExecutor<MegaMenu> {
 
+    boolean existsByName(String name);
 }

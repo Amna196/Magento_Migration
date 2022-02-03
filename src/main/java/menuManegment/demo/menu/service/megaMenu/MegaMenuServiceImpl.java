@@ -8,6 +8,7 @@ import menuManegment.demo.menu.model.MegaMenuModel;
 import menuManegment.demo.menu.repository.MegaMenuRepository;
 import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -50,5 +51,13 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
 
     public Page<MegaMenu> retrieves(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    @Override
+    public MegaMenuModel create(MegaMenuModel model) {
+        if( !repository.existsByName(model.getName())){
+            return mapper.toModel(create(mapper.toEntity(model)));
+        }
+        throw new DuplicateKeyException("Record already exists");
     }
 }
