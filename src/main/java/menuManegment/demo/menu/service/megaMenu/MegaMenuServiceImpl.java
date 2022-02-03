@@ -50,6 +50,5 @@ public class MegaMenuServiceImpl extends AbstractService<MegaMenu,
 
     public Page<MegaMenu> retrieves(Pageable pageable) {
         return repository.findAll(pageable);
-
     }
 }

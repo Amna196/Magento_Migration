@@ -1,8 +1,14 @@
 package menuManegment.demo.menu.model;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import menuManegment.demo.menu.enums.Status;
+import menuManegment.demo.menu.response.ViewMegaMenuItem;
 
 import java.io.Serializable;
 
@@ -19,6 +25,7 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("item_id")
     private String itemId;
 
+    @JsonView(ViewMegaMenuItem.Summary.class)
     private String name;
 
     @JsonProperty("show_name")
@@ -43,6 +50,7 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("is_group")
     private Short isGroup;
 
+    @JsonView(ViewMegaMenuItem.Summary.class)
     private Status status;
 
     @JsonProperty("disable_bellow")
@@ -179,6 +187,7 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("isgroup_level")
     private Short isgroupLevel;
 
+    @JsonView(ViewMegaMenuItem.Summary.class)
     private Integer menu_id;
 
     private MegaMenuModel megaMenu;

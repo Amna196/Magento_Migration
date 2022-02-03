@@ -2,11 +2,14 @@ package menuManegment.demo.menu.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import menuManegment.demo.menu.enums.Status;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
