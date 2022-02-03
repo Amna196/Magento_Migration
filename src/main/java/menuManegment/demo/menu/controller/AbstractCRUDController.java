@@ -47,7 +47,7 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
      */
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody M form){
-        log.info("<< Calling update api in AbstractCRUDController.... >>");
+        log.info("<< Calling update api in AbstractCRUDController class .... >>");
         form.setId(id);
         service.update(form);
         return ResponseEntity.ok().build();

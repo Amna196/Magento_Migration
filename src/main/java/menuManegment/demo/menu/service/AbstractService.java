@@ -1,12 +1,13 @@
 package menuManegment.demo.menu.service;
 
-import java.util.List;
-
-import java.util.NoSuchElementException;
 import menuManegment.demo.menu.entity.Loadable;
 import menuManegment.demo.menu.mapper.GenericMapper;
 import menuManegment.demo.menu.model.ModelLoadable;
 import menuManegment.demo.menu.repository.GenericRepository;
+import org.springframework.data.domain.*;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class AbstractService<E extends Loadable<Integer>, M extends ModelLoadable<Integer>,
         R extends GenericRepository<E>> implements CRUD<E, M> {
@@ -47,10 +48,13 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     }
 
     @Override
-    public List<M> retrieveAll(List<Integer> ids) {
+    public List<M> retrieveAll(List<Integer> ids) throws NoSuchElementException{
         List<E> entities = repository.findAllById(ids);
-        return mapper.toModels(entities);
-
+        if(entities.size() == ids.size()) {
+            return mapper.toModels(entities);
+        }else{
+            throw new NoSuchElementException("id Not Found");
+        }
     }
 
     @Override
@@ -62,9 +66,24 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     @Override
     public E read(Loadable<Integer> id){
         if (id == null || id.getId() == null) {
-            throw new NoSuchElementException("Please select a valid to update");
+            throw new NoSuchElementException("Please select a valid id");
         }
         return repository.findById(id.getId()).orElseThrow(() -> new NoSuchElementException("id Not Found"));
     }
 
+    @Override
+    public Page<M> sortAsc(String field, Pageable pageable) {
+        Page<E> entities = repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.ASC, field)));
+        List<M> models = mapper.toModels(entities.getContent());
+        return new PageImpl<>(models, pageable, entities.getTotalElements());
+//        return mapper.toModelsPage(repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.ASC, field))));
+    }
+
+    @Override
+    public Page<M> sortDesc(String field, Pageable pageable) {
+        Page<E> entities = repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, field)));
+        List<M> models = mapper.toModels(entities.getContent());
+        return new PageImpl<>(models, pageable, entities.getTotalElements());
+//        return repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, field)));
+    }
 }

@@ -9,6 +9,8 @@ import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class MegaMenuItemServiceImpl extends AbstractService<MegaMenuItem,
@@ -18,5 +20,11 @@ public class MegaMenuItemServiceImpl extends AbstractService<MegaMenuItem,
     public MegaMenuItemServiceImpl(MegaMenuItemRepository repository,
                                    MegaMenuItemMapper mapper) {
         super(repository, mapper);
+    }
+
+    public List<MegaMenuItemModel> retrieveList(Integer id){
+        log.info("<< calling retrieveList method in MegaMenuItemServiceImpl class >>");
+        List<MegaMenuItem> entities = repository.findAllByMenuId(id);
+        return mapper.toModels(entities);
     }
 }
