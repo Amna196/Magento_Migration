@@ -7,6 +7,7 @@ import menuManegment.demo.menu.model.MegaMenuItemModel;
 import menuManegment.demo.menu.repository.MegaMenuItemRepository;
 import menuManegment.demo.menu.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +27,14 @@ public class MegaMenuItemServiceImpl extends AbstractService<MegaMenuItem,
         log.info("<< calling retrieveList method in MegaMenuItemServiceImpl class >>");
         List<MegaMenuItem> entities = repository.findAllByMenuId(id);
         return mapper.toModels(entities);
+    }
+
+    @Override
+    public MegaMenuItemModel create(MegaMenuItemModel model) {
+        if( !repository.existsByItemId(model.getItemId())){
+            return mapper.toModel(create(mapper.toEntity(model)));
+        }
+        throw new DuplicateKeyException("Record already exists");
+
     }
 }

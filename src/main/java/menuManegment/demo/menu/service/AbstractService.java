@@ -21,10 +21,7 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     }
 
     @Override
-    public M create(M model) {
-        return mapper.toModel(create(mapper.toEntity(model)));
-    }
-
+    public abstract M create(M model);
 
     @Override
     public E create(E entity) {
