@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import menuManegment.demo.menu.config.MenuStructureConverter;
 import menuManegment.demo.menu.enums.Status;
+import menuManegment.demo.menu.model.MegaMenuModel;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -39,7 +41,8 @@ public class MegaMenu implements Loadable<Integer>{
     @NonNull
     @Lob
     @Column(length = 429496729)
-    private String structure;
+    @Convert(converter = MenuStructureConverter.class)
+    private List<MegaMenuModel.MenuStructure> structure;
 
     @NonNull
     @Column(name = "disable_bellow")

@@ -32,7 +32,18 @@ public class MegaMenuModel implements ModelLoadable<Integer>, Serializable {
     @JsonProperty("mobile_template")
     private String mobileTemplate;
 
-    private String structure;
+    private List<MenuStructure> structure;
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MenuStructure implements Serializable {
+
+        private String id;
+        private String bind;
+        private List<MenuStructure> children;
+    }
 
     @JsonProperty("disable_bellow")
     private Short disableBellow;
