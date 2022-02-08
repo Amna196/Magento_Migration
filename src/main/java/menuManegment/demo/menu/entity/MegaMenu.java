@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import menuManegment.demo.menu.config.MenuStructureConverter;
 import menuManegment.demo.menu.enums.Status;
-import menuManegment.demo.menu.model.MegaMenuModel;
+import menuManegment.demo.menu.model.MenuStructure;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -42,7 +42,7 @@ public class MegaMenu implements Loadable<Integer>{
     @Lob
     @Column(length = 429496729)
     @Convert(converter = MenuStructureConverter.class)
-    private List<MegaMenuModel.MenuStructure> structure;
+    private List<MenuStructure> structure;
 
     @NonNull
     @Column(name = "disable_bellow")

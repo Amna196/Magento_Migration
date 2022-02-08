@@ -18,11 +18,11 @@ public interface CRUD<E extends Loadable<?>, M extends ModelLoadable<?>> {
 
     E read(Loadable<Integer> id);
 
-    List<M> retrieveAll(List<Integer> ids);
+    List<M> retrieveAllIds(List<Integer> ids);
 
     M retrieve(Loadable<Integer> id);
 
-    List<M> retrieves();
+    List<M> retrieveAll();
 
     @Transactional
     void delete(Loadable<Integer> id);
