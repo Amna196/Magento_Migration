@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.created;
-import static org.springframework.http.ResponseEntity.noContent;
 
 @Slf4j
 public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
@@ -23,7 +22,7 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody M form, HttpServletRequest request) {
+    public ResponseEntity<Void> create(@RequestBody M form, HttpServletRequest request) {
         M model = service.create(form);
         return created(ServletUriComponentsBuilder.fromContextPath(request).path(controllerPath())
                 .buildAndExpand(model.getId()).toUri()).build();
@@ -35,8 +34,8 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
     }
 
     @GetMapping()
-    public List<M> all() {
-        return service.retrieves();
+    public List<M> getAll() {
+        return service.retrieveAll();
     }
 
     /**
@@ -57,7 +56,7 @@ public abstract class AbstractCRUDController<M extends ModelLoadable<Integer>> {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
         service.delete(() -> id);
-        return noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     public abstract String controllerPath();

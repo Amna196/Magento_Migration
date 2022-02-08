@@ -3,6 +3,7 @@ package menuManegment.demo.menu.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.slf4j.Slf4j;
 import menuManegment.demo.menu.model.MegaMenuModel;
+import menuManegment.demo.menu.model.MenuStructure;
 import menuManegment.demo.menu.response.ViewMegaMenuItem;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuService;
 import menuManegment.demo.menu.service.megaMenu.MegaMenuServiceImpl;
@@ -44,7 +45,7 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     @PatchMapping("/{status}")
     public ResponseEntity<?> updateList(@PathVariable String status, @RequestBody List<Integer> ids) {
         log.info("<< Calling updateList api in MegaMenuController class .... >>");
-        List<MegaMenuModel> models = service.retrieveAll(ids);
+        List<MegaMenuModel> models = service.retrieveAllIds(ids);
         megaMenuService.updateStatus(status, models);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +58,7 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     @GetMapping("/count")
     public ResponseEntity<?> count() {
         log.info("<< Calling count api in MegaMenuController class .... >>");
-        List<MegaMenuModel> models = service.retrieves();
+        List<MegaMenuModel> models = service.retrieveAll();
         Long count = megaMenuService.count(models);
         return ResponseEntity.ok().body(count);
     }
@@ -118,8 +119,20 @@ public class MegaMenuController extends AbstractCRUDController<MegaMenuModel> {
     @JsonView(ViewMegaMenuItem.Summary.class)
     @GetMapping("/{menu_id}/items")
     public ResponseEntity<?> retrieveItems(@PathVariable("menu_id") Integer menu_id) {
-        log.info("<< Calling retrieveItems api in MegaMenuItemController class.... >>");
+        log.info("<< Calling retrieveItems api in MegaMenuController class.... >>");
         return  ResponseEntity.ok().body(megaMenuItemService.retrieveList(menu_id));
+    }
+
+    /**
+     * Update Structure (Drag & Drop in MenuItems)
+     *
+     */
+    @PatchMapping("/{menu_id}/structure")
+    public ResponseEntity<?> updateStructure(@PathVariable("menu_id") Integer menu_id,
+                                             @RequestBody List<MenuStructure> json) {
+        log.info("<< Calling updateStructure api in MegaMenuController class.... >>");
+        megaMenuService.updateStructure(menu_id, json);
+        return  ResponseEntity.ok().build();
     }
 
 }

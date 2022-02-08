@@ -25,6 +25,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleResourceIllegalArgumentException(IllegalArgumentException exception, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
     // handle global exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request){

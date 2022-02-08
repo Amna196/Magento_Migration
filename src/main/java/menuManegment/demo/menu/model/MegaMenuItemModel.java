@@ -23,6 +23,7 @@ public class MegaMenuItemModel implements ModelLoadable<Integer>, Serializable {
     private Integer id;
 
     @JsonProperty("item_id")
+    @JsonView(ViewMegaMenuItem.Summary.class)
     private String itemId;
 
     @JsonView(ViewMegaMenuItem.Summary.class)

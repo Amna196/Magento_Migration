@@ -40,12 +40,12 @@ public abstract class AbstractService<E extends Loadable<Integer>, M extends Mod
     }
 
     @Override
-    public List<M> retrieves() {
+    public List<M> retrieveAll() {
         return mapper.toModels(repository.findAll());
     }
 
     @Override
-    public List<M> retrieveAll(List<Integer> ids) throws NoSuchElementException{
+    public List<M> retrieveAllIds(List<Integer> ids) throws NoSuchElementException{
         List<E> entities = repository.findAllById(ids);
         if(entities.size() == ids.size()) {
             return mapper.toModels(entities);
